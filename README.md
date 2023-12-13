@@ -1,4 +1,4 @@
-# Monorepo: React Frontend App with Vite and Node, Rails API Checkout Demo
+# React Frontend App with Vite and Node, Rails API Checkout Demo
 
 This monorepo contains a React frontend application built with Vite and Node 18.0.0, and a Rails API project built with Ruby 3.2.2 and Rails 7.1.2, using PostgreSQL 14 as the database.
 

@@ -1,3 +1,4 @@
 backend/bin
 backend/tmp
+backend/config/master.key
 frontend/node_modules

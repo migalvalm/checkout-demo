@@ -1,0 +1,1639 @@
+  [1m[35m (84.9ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (28.8ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35m (14.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 15:44:11.333805', '2023-11-16 15:44:11.333807') RETURNING "key"[0m
+Migrating to CreateOrders (20231116154027)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154027') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20231116154141)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154141') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (31.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (17.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (74.4ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (23.1ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 15:44:59.759066', '2023-11-16 15:44:59.759069') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 15:44:59.761090', '2023-11-16 15:44:59.761092') RETURNING "key"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 15:44:59.779809', '2023-11-16 15:44:59.779811') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2023-11-16 15:44:59.780643' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 15:44:59.781435', '2023-11-16 15:44:59.781436') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (33.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (20.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (77.9ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (37.3ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 16:18:56.498680', '2023-11-16 16:18:56.498682') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 16:18:56.522678', '2023-11-16 16:18:56.522679') RETURNING "key"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 16:18:56.539557', '2023-11-16 16:18:56.539558') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2023-11-16 16:18:56.540558' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 16:18:56.541208', '2023-11-16 16:18:56.541209') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (21.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (18.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (76.8ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (29.1ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 19:47:51.335725', '2023-11-16 19:47:51.335728') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 19:47:51.336860', '2023-11-16 19:47:51.336861') RETURNING "key"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-16 19:47:51.351278', '2023-11-16 19:47:51.351279') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2023-11-16 19:47:51.352041' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-16 19:47:51.352666', '2023-11-16 19:47:51.352666') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mOrder Load (0.8ms)[0m  [1m[34mSELECT "orders".* FROM "orders" ORDER BY "orders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "card_number", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "piça"], ["email", "piça"], ["card_number", "123"], ["created_at", "2023-11-16 20:13:14.881590"], ["updated_at", "2023-11-16 20:13:14.881590"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (4.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", nil], ["price", 5], ["state", nil], ["user_id", nil], ["created_at", "2023-11-17 00:15:02.026425"], ["updated_at", "2023-11-17 00:15:02.026425"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (7.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (27.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (20.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (80.3ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (30.8ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-17 00:16:16.074093', '2023-11-17 00:16:16.074095') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-17 00:16:16.078931', '2023-11-17 00:16:16.078932') RETURNING "key"[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" integer, "state" integer, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20231116154141)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20231116154027);[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-17 00:16:16.094484', '2023-11-17 00:16:16.094485') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'test', "updated_at" = '2023-11-17 00:16:16.095498' WHERE "ar_internal_metadata"."key" = 'environment'[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'f402c475d77f739cb68982f4ecbe13a1edc678f1', '2023-11-17 00:16:16.096142', '2023-11-17 00:16:16.096142') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (34.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (16.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (92.7ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (27.4ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-17 00:17:28.541194', '2023-11-17 00:17:28.541196') RETURNING "key"[0m
+Migrating to CreateOrders (20231116154027)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" decimal, "state" integer DEFAULT 0, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154027') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20231116154141)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154141') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (44.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_development"[0m
+  [1m[35m (19.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "bounce_challenge_be_test"[0m
+  [1m[35m (102.2ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_development" ENCODING = 'unicode'[0m
+  [1m[35m (37.0ms)[0m  [1m[35mCREATE DATABASE "bounce_challenge_be_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2023-11-17 00:17:51.656898', '2023-11-17 00:17:51.656901') RETURNING "key"[0m
+Migrating to CreateOrders (20231116154027)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "location" character varying, "quantity" integer, "price" float, "state" integer DEFAULT 0, "user_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_orders_on_user_id" ON "orders" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154027') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20231116154141)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "card_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20231116154141') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7825033761343948485)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:11:17 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::OrdersController#checkout as HTML
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.0ms | Allocations: 2715)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: order):
+  
+app/controllers/api/v1/orders_controller.rb:20:in `checkout_params'
+app/controllers/api/v1/orders_controller.rb:4:in `checkout'
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:11:39 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 95)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: order):
+  
+app/controllers/api/v1/orders_controller.rb:20:in `checkout_params'
+app/controllers/api/v1/orders_controller.rb:4:in `checkout'
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:12:45 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 95)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: order):
+  
+app/controllers/api/v1/orders_controller.rb:20:in `checkout_params'
+app/controllers/api/v1/orders_controller.rb:4:in `checkout'
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:27:39 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"quantity"=>0, "name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Create (2.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "card_number", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "miguel"], ["email", "miguel@email.com"], ["card_number", nil], ["created_at", "2023-11-22 00:28:05.809575"], ["updated_at", "2023-11-22 00:28:05.809575"]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Update (1.7ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4242 4242"], ["updated_at", "2023-11-22 00:28:05.813787"], ["id", 1]]
+  ↳ app/services/orders/checkout_service.rb:19:in `block in call'
+  [1m[36mOrder Create (1.9ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:28:05.829885"], ["updated_at", "2023-11-22 00:28:05.829885"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:28:05.832719"], ["id", 1]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 26271ms (Views: 0.4ms | ActiveRecord: 30.6ms | Allocations: 99786)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:28:28 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"quantity"=>0, "name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:29:03.591180"], ["updated_at", "2023-11-22 00:29:03.591180"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:29:03.593795"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 34950ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 42609)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:29:13 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:29:21.272365"], ["updated_at", "2023-11-22 00:29:21.272365"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:29:21.274817"], ["id", 3]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 7277ms (Views: 0.6ms | ActiveRecord: 2.3ms | Allocations: 28503)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:29:30 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:29:34.767469"], ["updated_at", "2023-11-22 00:29:34.767469"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:29:34.769217"], ["id", 4]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 3869ms (Views: 0.5ms | ActiveRecord: 1.9ms | Allocations: 20945)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:29:50 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:29:53.593782"], ["updated_at", "2023-11-22 00:29:53.593782"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:29:53.596757"], ["id", 5]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2739ms (Views: 0.5ms | ActiveRecord: 1.9ms | Allocations: 15497)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:30:12 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:30:14.662708"], ["updated_at", "2023-11-22 00:30:14.662708"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:30:14.664457"], ["id", 6]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2224ms (Views: 0.5ms | ActiveRecord: 2.4ms | Allocations: 15129)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:30:39 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:30:41.660067"], ["updated_at", "2023-11-22 00:30:41.660067"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.6ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:30:41.663049"], ["id", 7]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2063ms (Views: 0.4ms | ActiveRecord: 2.0ms | Allocations: 14942)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:30:57 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:30:59.872971"], ["updated_at", "2023-11-22 00:30:59.872971"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:30:59.875853"], ["id", 8]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2031ms (Views: 0.5ms | ActiveRecord: 2.2ms | Allocations: 15206)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:42:16 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (1.7ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:42:21.190195"], ["updated_at", "2023-11-22 00:42:21.190195"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.7ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:42:21.194670"], ["id", 9]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 5171ms (Views: 0.5ms | ActiveRecord: 12.7ms | Allocations: 27335)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:42:56 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 1], ["created_at", "2023-11-22 00:43:00.223886"], ["updated_at", "2023-11-22 00:43:00.223886"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:43:00.227193"], ["id", 10]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 3430ms (Views: 0.4ms | ActiveRecord: 1.9ms | Allocations: 15595)
+
+
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mOrder Load (1.1ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.9ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 2]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 3]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.9ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 4]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 5]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.3ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 6]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 7]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.3ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 8]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.4ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 9]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.3ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 10]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:45:10 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "card_number", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "miguel"], ["email", "email@email.com"], ["card_number", nil], ["created_at", "2023-11-22 00:45:14.895710"], ["updated_at", "2023-11-22 00:45:14.895710"]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4242 4242"], ["updated_at", "2023-11-22 00:45:14.898079"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:19:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:45:14.900609"], ["updated_at", "2023-11-22 00:45:14.900609"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:45:14.902585"], ["id", 11]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 4855ms (Views: 0.6ms | ActiveRecord: 2.8ms | Allocations: 18901)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:46:50 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.7ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:46:53.059436"], ["updated_at", "2023-11-22 00:46:53.059436"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:46:53.063023"], ["id", 12]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2737ms (Views: 0.5ms | ActiveRecord: 2.0ms | Allocations: 15784)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:47:08 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"almeida", "email"=>"almeida@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.9ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:47:11.790305"], ["updated_at", "2023-11-22 00:47:11.790305"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 00:47:11.793628"], ["id", 13]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2974ms (Views: 0.2ms | ActiveRecord: 2.4ms | Allocations: 16018)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:47:30 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.8ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:47:33.839574"], ["updated_at", "2023-11-22 00:47:33.839574"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:47:33.841787"], ["id", 14]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 200 OK in 2903ms (Views: 0.2ms | ActiveRecord: 17.9ms | Allocations: 23642)
+
+
+  [1m[36mOrder Load (0.4ms)[0m  [1m[34mSELECT "orders".* FROM "orders" ORDER BY "orders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mOrder Load (0.8ms)[0m  [1m[34mSELECT "orders".* FROM "orders" ORDER BY "orders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders" ORDER BY "orders"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:53:54 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.7ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:53:57.430172"], ["updated_at", "2023-11-22 00:53:57.430172"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.6ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:53:57.432381"], ["id", 15]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 422 Unprocessable Entity in 2585ms (Views: 0.1ms | ActiveRecord: 8.2ms | Allocations: 26566)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:54:38 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:54:41.132761"], ["updated_at", "2023-11-22 00:54:41.132761"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:54:41.134448"], ["id", 16]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 422 Unprocessable Entity in 2400ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 15122)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:54:57 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email1@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:55:02.566920"], ["updated_at", "2023-11-22 00:55:02.566920"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:55:02.570300"], ["id", 17]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 422 Unprocessable Entity in 5055ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 17750)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:55:36 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"dasda", "email"=>"4@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:55:40.572752"], ["updated_at", "2023-11-22 00:55:40.572752"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:55:40.576349"], ["id", 18]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 422 Unprocessable Entity in 3798ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 16740)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 00:56:40 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 00:56:42.217116"], ["updated_at", "2023-11-22 00:56:42.217116"]]
+  ↳ app/services/orders/checkout_service.rb:23:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 00:56:42.218066"], ["id", 19]]
+  ↳ app/services/orders/checkout_service.rb:26:in `block in call'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:15:in `call'
+Completed 422 Unprocessable Entity in 2093ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 15243)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:05:35 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email12@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>6}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.8ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 6], ["price", 35.400000000000006], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:05:35.937601"], ["updated_at", "2023-11-22 01:05:35.937601"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:05:35.938953"], ["id", 20]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 24ms (Views: 0.1ms | ActiveRecord: 8.5ms | Allocations: 13068)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:06:26 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"2424@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:06:26.346508"], ["updated_at", "2023-11-22 01:06:26.346508"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:06:26.348389"], ["id", 21]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 15ms (Views: 0.2ms | ActiveRecord: 4.4ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:07:51 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"dasdas", "email"=>"dadas@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (1.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:07:51.732985"], ["updated_at", "2023-11-22 01:07:51.732985"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.8ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:07:51.735665"], ["id", 22]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.1ms | ActiveRecord: 3.4ms | Allocations: 2914)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:08:24 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"asdasd", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:08:24.193583"], ["updated_at", "2023-11-22 01:08:24.193583"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (2.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:08:24.194855"], ["id", 23]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.1ms | ActiveRecord: 3.5ms | Allocations: 2914)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:09:13 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"dsada", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (1.1ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:09:13.800716"], ["updated_at", "2023-11-22 01:09:13.800716"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:09:13.802694"], ["id", 24]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 18ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 2914)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:09:52 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"asda@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:09:52.237360"], ["updated_at", "2023-11-22 01:09:52.237360"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:09:52.238412"], ["id", 25]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 5ms (Views: 0.1ms | ActiveRecord: 2.0ms | Allocations: 2914)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:10:30 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"assadasd", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (1.7ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:10:30.689470"], ["updated_at", "2023-11-22 01:10:30.689470"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:10:30.692123"], ["id", 26]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 16ms (Views: 0.1ms | ActiveRecord: 8.7ms | Allocations: 2914)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:11:21 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"assadasd", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:11:21.858856"], ["updated_at", "2023-11-22 01:11:21.858856"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:11:21.861045"], ["id", 27]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:11:29 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"sdasdas", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:11:29.581539"], ["updated_at", "2023-11-22 01:11:29.581539"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:11:29.583026"], ["id", 28]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.1ms | ActiveRecord: 2.8ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:11:33 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"sdasdas", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:11:33.672116"], ["updated_at", "2023-11-22 01:11:33.672116"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.7ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:11:33.674691"], ["id", 29]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 11ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:12:07 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:12:07.040702"], ["updated_at", "2023-11-22 01:12:07.040702"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:12:07.041817"], ["id", 30]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 17ms (Views: 0.1ms | ActiveRecord: 3.2ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:16:01 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:16:01.301193"], ["updated_at", "2023-11-22 01:16:01.301193"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:16:01.302468"], ["id", 31]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 6ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:16:08 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:16:08.027412"], ["updated_at", "2023-11-22 01:16:08.027412"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:16:08.029044"], ["id", 32]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:16:36 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"migeul", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:16:36.512221"], ["updated_at", "2023-11-22 01:16:36.512221"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:16:36.513691"], ["id", 33]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:18:03 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:18:03.122876"], ["updated_at", "2023-11-22 01:18:03.122876"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:18:03.124998"], ["id", 34]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 14ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:18:37 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"424242424242", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:18:38.012228"], ["updated_at", "2023-11-22 01:18:38.012228"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:18:38.014518"], ["id", 35]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 22ms (Views: 0.3ms | ActiveRecord: 3.5ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:19:35 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:19:35.412370"], ["updated_at", "2023-11-22 01:19:35.412370"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:19:35.414185"], ["id", 36]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:20:55 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:20:56.106159"], ["updated_at", "2023-11-22 01:20:56.106159"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:20:56.107252"], ["id", 37]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.1ms | ActiveRecord: 12.4ms | Allocations: 10680)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:22:44 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:22:44.978348"], ["updated_at", "2023-11-22 01:22:44.978348"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:22:44.979141"], ["id", 38]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 13ms (Views: 0.1ms | ActiveRecord: 7.8ms | Allocations: 10612)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:23:04 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>1}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 1], ["price", 5.9], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:23:04.524197"], ["updated_at", "2023-11-22 01:23:04.524197"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:23:04.525070"], ["id", 39]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 14ms (Views: 0.1ms | ActiveRecord: 8.1ms | Allocations: 10587)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:25:22 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:25:22.273866"], ["updated_at", "2023-11-22 01:25:22.273866"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:25:22.275041"], ["id", 40]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.1ms | ActiveRecord: 9.9ms | Allocations: 10605)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:26:12 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:26:12.923717"], ["updated_at", "2023-11-22 01:26:12.923717"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:26:12.924986"], ["id", 41]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 20ms (Views: 0.1ms | ActiveRecord: 1.4ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:26:22 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:26:22.836292"], ["updated_at", "2023-11-22 01:26:22.836292"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:26:22.837146"], ["id", 42]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 14ms (Views: 0.1ms | ActiveRecord: 8.0ms | Allocations: 10601)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:26:31 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:26:31.169718"], ["updated_at", "2023-11-22 01:26:31.169718"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:26:31.170594"], ["id", 43]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 14ms (Views: 0.1ms | ActiveRecord: 8.6ms | Allocations: 10587)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:26:51 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:26:51.354485"], ["updated_at", "2023-11-22 01:26:51.354485"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:26:51.356356"], ["id", 44]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 9ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:27:06 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:27:06.696144"], ["updated_at", "2023-11-22 01:27:06.696144"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (1.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:27:06.699033"], ["id", 45]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 17ms (Views: 0.3ms | ActiveRecord: 2.8ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:28:11 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:28:11.515443"], ["updated_at", "2023-11-22 01:28:11.515443"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:28:11.517350"], ["id", 46]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 9ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:32:48 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:32:48.554585"], ["updated_at", "2023-11-22 01:32:48.554585"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:32:48.555554"], ["id", 47]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 17ms (Views: 0.1ms | ActiveRecord: 10.5ms | Allocations: 10651)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:32:55 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:32:55.680943"], ["updated_at", "2023-11-22 01:32:55.680943"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:32:55.682436"], ["id", 48]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2917)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:36:19 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.7ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:36:19.822221"], ["updated_at", "2023-11-22 01:36:19.822221"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:36:19.823452"], ["id", 49]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 17ms (Views: 0.1ms | ActiveRecord: 11.3ms | Allocations: 10588)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:36:27 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:36:27.801914"], ["updated_at", "2023-11-22 01:36:27.801914"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:36:27.804702"], ["id", 50]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 15ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 2918)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:36:33 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:36:33.465139"], ["updated_at", "2023-11-22 01:36:33.465139"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:36:33.466551"], ["id", 51]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 2917)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:37:03 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel Almeida", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (1.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:37:03.856054"], ["updated_at", "2023-11-22 01:37:03.856054"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 01:37:03.858564"], ["id", 52]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 18ms (Views: 0.1ms | ActiveRecord: 2.4ms | Allocations: 2948)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:37:33 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:37:33.342986"], ["updated_at", "2023-11-22 01:37:33.342986"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 01:37:33.345977"], ["id", 53]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 9.0ms | Allocations: 2928)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:38:06 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:38:06.515288"], ["updated_at", "2023-11-22 01:38:06.515288"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:38:06.516789"], ["id", 54]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 5ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:38:26 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:38:26.541030"], ["updated_at", "2023-11-22 01:38:26.541030"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:38:26.543375"], ["id", 55]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 10ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:39:00 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:39:00.927183"], ["updated_at", "2023-11-22 01:39:00.927183"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 01:39:00.928901"], ["id", 56]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 1.2ms | Allocations: 2928)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:40:45 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.9ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:40:45.175616"], ["updated_at", "2023-11-22 01:40:45.175616"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:40:45.178490"], ["id", 57]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 19ms (Views: 0.1ms | ActiveRecord: 5.6ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:40:52 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:40:52.640904"], ["updated_at", "2023-11-22 01:40:52.640904"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 01:40:52.643774"], ["id", 58]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 2.1ms | Allocations: 2928)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:49:54 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:49:54.146733"], ["updated_at", "2023-11-22 01:49:54.146733"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.8ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:49:54.148534"], ["id", 59]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 24ms (Views: 0.2ms | ActiveRecord: 9.1ms | Allocations: 5677)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:50:01 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.8ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:50:01.465970"], ["updated_at", "2023-11-22 01:50:01.465970"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.6ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:50:01.469036"], ["id", 60]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 10ms (Views: 0.2ms | ActiveRecord: 2.3ms | Allocations: 2916)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:56:20 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:56:20.577845"], ["updated_at", "2023-11-22 01:56:20.577845"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:56:20.579736"], ["id", 61]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 26ms (Views: 0.2ms | ActiveRecord: 10.9ms | Allocations: 5632)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:56:28 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:56:28.682305"], ["updated_at", "2023-11-22 01:56:28.682305"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:56:28.685091"], ["id", 62]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 10ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:56:35 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:56:35.849385"], ["updated_at", "2023-11-22 01:56:35.849385"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:56:35.853640"], ["id", 63]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 11ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:56:43 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:56:43.391394"], ["updated_at", "2023-11-22 01:56:43.391394"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 01:56:43.392893"], ["id", 64]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 9ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 2915)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 01:56:49 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>4}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 4], ["price", 23.6], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 01:56:49.894330"], ["updated_at", "2023-11-22 01:56:49.894330"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 01:56:49.896861"], ["id", 65]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.0ms | Allocations: 2927)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 17:53:14 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4242 4242 4213 2142", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4213 2142"], ["updated_at", "2023-11-22 17:53:14.368608"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 17:53:14.378917"], ["updated_at", "2023-11-22 17:53:14.378917"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.7ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 17:53:14.383595"], ["id", 66]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 47ms (Views: 0.4ms | ActiveRecord: 17.3ms | Allocations: 31079)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 17:53:35 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4212 4214 2421 4121", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.9ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4212 4214 2421 4121"], ["updated_at", "2023-11-22 17:53:35.677166"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 17:53:35.680771"], ["updated_at", "2023-11-22 17:53:35.680771"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 17:53:35.684870"], ["id", 67]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 15ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 3517)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 17:53:41 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"email@email.com", "card_number"=>"4212 4214 2421 4121", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 17:53:41.976103"], ["updated_at", "2023-11-22 17:53:41.976103"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 17:53:41.977737"], ["id", 68]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 10ms (Views: 0.4ms | ActiveRecord: 1.4ms | Allocations: 2934)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 18:54:34 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4123 4242 1232", "quantity"=>3}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4123 4242 1232"], ["updated_at", "2023-11-22 18:54:34.575579"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.4ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 3], ["price", 17.700000000000003], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 18:54:34.577916"], ["updated_at", "2023-11-22 18:54:34.577916"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 18:54:34.578941"], ["id", 69]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 33ms (Views: 0.2ms | ActiveRecord: 16.7ms | Allocations: 13712)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 18:54:50 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Luis", "email"=>"luis@email.com", "card_number"=>"4241 2312 4214 2424", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4241 2312 4214 2424"], ["updated_at", "2023-11-22 18:54:50.556443"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 18:54:50.558753"], ["updated_at", "2023-11-22 18:54:50.558753"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 18:54:50.560449"], ["id", 70]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 11ms (Views: 0.1ms | ActiveRecord: 2.0ms | Allocations: 3506)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 18:54:58 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Luis", "email"=>"luis@email.com", "card_number"=>"4241 2312 4214 2424", "quantity"=>5}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 5], ["price", 29.5], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 18:54:58.516410"], ["updated_at", "2023-11-22 18:54:58.516410"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.2ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 18:54:58.517908"], ["id", 71]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 1.4ms | Allocations: 2926)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 22:13:34 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"jjj", "email"=>"j@email.com", "card_number"=>"4242 4242 4242 4212", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4242 4212"], ["updated_at", "2023-11-22 22:13:35.047255"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 22:13:35.056828"], ["updated_at", "2023-11-22 22:13:35.056828"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.4ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 22:13:35.057839"], ["id", 72]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 44ms (Views: 0.1ms | ActiveRecord: 18.0ms | Allocations: 31009)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 22:13:43 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"jjj", "email"=>"j@email.com", "card_number"=>"4242 4242 4242 4212", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 22:13:43.299988"], ["updated_at", "2023-11-22 22:13:43.299988"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-11-22 22:13:43.302693"], ["id", 73]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 12ms (Views: 0.4ms | ActiveRecord: 2.1ms | Allocations: 2936)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-11-22 22:13:50 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"jjj", "email"=>"j@email.com", "card_number"=>"4242 4242 4242 4212", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.5ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-11-22 22:13:50.249109"], ["updated_at", "2023-11-22 22:13:50.249109"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.5ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-11-22 22:13:50.252249"], ["id", 74]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 13ms (Views: 0.4ms | ActiveRecord: 2.7ms | Allocations: 2990)
+
+
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-12-07 15:05:02 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (1.9ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4242 4242"], ["updated_at", "2023-12-07 15:05:02.870897"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (2.8ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-12-07 15:05:02.884654"], ["updated_at", "2023-12-07 15:05:02.884654"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.7ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 3], ["updated_at", "2023-12-07 15:05:02.888217"], ["id", 75]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 422 Unprocessable Entity in 53ms (Views: 0.1ms | ActiveRecord: 20.8ms | Allocations: 31009)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-12-07 15:05:11 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"Miguel", "email"=>"miguel@email.com", "card_number"=>"4242 4242 4242 4242", "quantity"=>2}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mOrder Create (0.3ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 2], ["price", 11.8], ["state", 1], ["user_id", 2], ["created_at", "2023-12-07 15:05:11.116472"], ["updated_at", "2023-12-07 15:05:11.116472"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-12-07 15:05:11.118347"], ["id", 76]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 1.5ms | Allocations: 2997)
+
+
+Started POST "/api/v1/orders/checkout" for ::1 at 2023-12-07 15:07:22 +0000
+Processing by Api::V1::OrdersController#checkout as HTML
+  Parameters: {"order"=>{"name"=>"miguel", "email"=>"dsadassa@email.com", "card_number"=>"4242 4242 4241 4312", "quantity"=>0}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/services/orders/checkout_service.rb:17:in `block in call'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "card_number" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["card_number", "4242 4242 4241 4312"], ["updated_at", "2023-12-07 15:07:22.944222"], ["id", 2]]
+  ↳ app/services/orders/checkout_service.rb:18:in `block in call'
+  [1m[36mOrder Create (0.2ms)[0m  [1m[32mINSERT INTO "orders" ("location", "quantity", "price", "state", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["location", nil], ["quantity", 0], ["price", 0.0], ["state", 1], ["user_id", 2], ["created_at", "2023-12-07 15:07:22.945589"], ["updated_at", "2023-12-07 15:07:22.945589"]]
+  ↳ app/services/orders/checkout_service.rb:22:in `block in call'
+  [1m[36mOrder Update (0.3ms)[0m  [1m[33mUPDATE "orders" SET "state" = $1, "updated_at" = $2 WHERE "orders"."id" = $3[0m  [["state", 2], ["updated_at", "2023-12-07 15:07:22.946450"], ["id", 77]]
+  ↳ app/services/orders/checkout_service.rb:25:in `block in call'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/services/orders/checkout_service.rb:14:in `call'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.8ms | Allocations: 3517)
+
+

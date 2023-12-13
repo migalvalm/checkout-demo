@@ -74,6 +74,6 @@ You need to have the following installed on your system:
 
 ## Demo Showcase
 
-Frontend: https://github.com/migalvalm/bounce-challenge-fe/assets/59445459/9e9d6cbf-1b6f-416d-a3b2-1aeb3be9471a
+https://github.com/migalvalm/checkout-demo/assets/59445459/6c5cc558-d861-4aca-bb45-c249038fdc4e
 
-Backend: https://github.com/migalvalm/bounce-challenge-be/assets/59445459/258b1efb-4ad1-4904-bfe5-b6974c5d5dda
+

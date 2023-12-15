@@ -2,7 +2,7 @@
 
 This monorepo contains a React frontend application built with Vite and Node 18.0.0, and a Rails API project built with Ruby 3.2.2 and Rails 7.1.2, using PostgreSQL 14 as the database.
 
-## [Tech Doc](./docs/challenge-tech-doc.pdf)
+## [Technical Documentation](./docs/tech-doc.pdf)
 
 ## Built With
 
